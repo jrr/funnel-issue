@@ -2,9 +2,18 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
+let exclude = [];
+
+if (!process.env.FOOBAR) {
+  exclude.push('**/tests/**/foo-bar*.js');
+}
+
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
-    // Add options here
+    funnel: {
+      enabled: true,
+      exclude
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated
